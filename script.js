@@ -31,8 +31,9 @@ d3.csv(csvUrl).then(rawData => {
 });
 
 function dibujarTreemap(data) {
-  const width = 1200;
-  const height = 700;
+  const container = document.getElementById("treemap");
+const width = container.clientWidth || 1200;
+const height = container.clientHeight || 650;
 
   const root = d3.hierarchy(data)
     .sum(d => d.value)
@@ -78,12 +79,26 @@ function dibujarTreemap(data) {
   .attr("ry", 10);
 
   categories.append("text")
-    .attr("x", d => d.x0 + 10)
-    .attr("y", d => d.y0 + 20)
-    .attr("fill", "#1E3A5F")
-    .attr("font-size", "14px")
-    .attr("font-weight", "bold")
-    .text(d => d.data.name);
+  .attr("x", d => d.x0 + 10)
+  .attr("y", d => d.y0 + 20)
+  .attr("fill", "#1E3A5F")
+  .attr("font-size", "13px")
+  .attr("font-weight", "bold")
+  .style("pointer-events", "none")
+  .each(function(d) {
+    const text = d3.select(this);
+    const width = d.x1 - d.x0;
+    const name = d.data.name;
+
+    if (width < 85) {
+      text.text(name.substring(0, 8) + "...");
+    } else if (name.length * 7 > width - 20) {
+      const maxChars = Math.floor((width - 20) / 7);
+      text.text(name.substring(0, Math.max(5, maxChars - 3)) + "...");
+    } else {
+      text.text(name);
+    }
+  });
 
   const leaves = svg.selectAll(".leaf")
     .data(root.leaves())
@@ -157,12 +172,12 @@ function dibujarTreemap(data) {
     const height = d.y1 - d.y0;
     const name = d.data.name;
 
-    if (width < 95 || height < 35) {
+    if (width < 55 || height < 32) {
       text.text("");
       return;
     }
 
-    const maxChars = Math.floor(width / 7);
+    const maxChars = Math.floor((width - 12) / 6.5);
 
     if (name.length > maxChars) {
       text.text(name.substring(0, Math.max(6, maxChars - 3)) + "...");
