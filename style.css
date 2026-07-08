@@ -1,0 +1,46 @@
+body {
+  margin: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f6fa;
+}
+
+h1 {
+  color: #17375E;
+}
+.subtitle {
+  margin-top: -10px;
+  margin-bottom: 18px;
+  color: #4b5563;
+  font-size: 14px;
+}
+#treemap {
+  width: 1200px;
+  height: 700px;
+  background: white;
+  border: 1px solid #cccccc;
+}
+
+.tooltip {
+  position: absolute;
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  max-width: 260px;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  color: #17375E;
+  margin-bottom: 4px;
+}
+
+.tooltip-row {
+  margin-top: 2px;
+}
