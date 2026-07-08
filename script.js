@@ -42,15 +42,16 @@ const height = container.clientHeight || 650;
   d3.treemap()
     .size([width, height])
     .paddingOuter(8)
-    .paddingTop(30)
+    .paddingTop(24)
     .paddingInner(3)
     .round(true)(root);
 
   const svg = d3.select("#treemap")
-    .html("")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width","100%")
+    .attr("height","100%")
+    .attr("viewBox",`0 0 ${width} ${height}`)
+    .attr("preserveAspectRatio","xMidYMid meet");
 
   const totalRegistros = root.value;
 
